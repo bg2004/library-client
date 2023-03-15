@@ -2,7 +2,8 @@ import { Route, Routes } from "react-router-dom"
 import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { Authorized } from "./Authorized"
-
+import { BookList } from "../components/book/BookList"
+import { BookForm } from "../components/book/BookForm"
 
 export const ApplicationViews = () => {
     return <>
@@ -10,8 +11,9 @@ export const ApplicationViews = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<Authorized />}>
-                {/* Add Routes here */}
+                <Route path="/books" element={<BookList />} />
             </Route>
+            <Route path="/bookform" element={<BookForm />} />
         </Routes>
     </>
 }

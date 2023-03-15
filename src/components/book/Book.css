@@ -1,0 +1,31 @@
+.book {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    }
+    
+    .book__title {
+    font-weight: bold;
+    font-size: 18px;
+    }
+    
+    .book__author {
+    font-style: italic;
+    margin-top: 5px;
+    }
+    .book__shelf {
+        font-style: italic;
+        margin-top: 5px;
+        }
+    
+    .book__description {
+    margin-top: 10px;
+    }
+    
+    .book__age_range {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    }
+
+    
