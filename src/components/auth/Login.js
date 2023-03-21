@@ -18,16 +18,15 @@ export const Login = () => {
         }
         loginUser(user)
             .then(res => {
-                if ("valid" in res && res.valid && "token" in res) {
-                    localStorage.setItem("lu_token", res.token)
-                    navigate("/")
-                }
-                else {
-                    invalidDialog.current.showModal()
-                }
+                if (res.valid) {
+                            console.log(res)
+                            localStorage.setItem("user_id", res.reader_id)
+                            localStorage.setItem("lu_token", res.token)
+                            navigate("/")
+                }            
             })
-    }
-
+    
+        }
     return (
         <main className="container--login">
             <dialog className="dialog dialog--auth" ref={invalidDialog}>
@@ -36,8 +35,8 @@ export const Login = () => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Level Up</h1>
-                    <h2>Please sign in</h2>
+                    <h1>Login</h1>
+                    
                     <fieldset>
                         <label htmlFor="inputUsername"> Username address </label>
                         <input ref={username} type="username" id="username" className="form-control" placeholder="Username address" required autoFocus />

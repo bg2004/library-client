@@ -1,10 +1,53 @@
 .navbar {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #bdc65b;
+    padding: 1rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .navbar__item {
+    list-style: none;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #c5fcff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .nav-link:hover {
+    background-color: #365b6d;
+  }
+  
+  .logo {
+    height: 10px;
+    width: auto;
+    cursor: pointer;
+  }
+  
+  .register-link {
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+  
+  .register-link:hover {
+    background-color: #0069d9;
+  }
+  
+  .navbar {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: left;
+    
 }
 
 .navbar__item {
     flex-basis: 20%;
     list-style-type: none;
 }
+

@@ -24,7 +24,6 @@ export const createBook = (book) => {
     })
 }
 
-
 export const getAgeRanges = () => {
     return fetch("http://localhost:8000/ageranges", { 
     headers:{
@@ -33,3 +32,35 @@ export const getAgeRanges = () => {
 })
     .then((response => response.json()))
 }
+
+export const UpdateBook = (book, bookId) => {
+    return fetch(`http://localhost:8000/books/${bookId}`, {
+        method: "PUT", 
+        headers:{
+            "Authorization":`Token ${localStorage.getItem("lu_token")}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(book)
+    })
+}
+
+export const getSingleBook = (bookId) => {
+    return fetch(`http://localhost:8000/books/${bookId}`, {
+        method: "GET",
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+        }
+    })
+        .then(response => response.json())
+}
+
+export const deleteBook = (bookId) => {
+    return fetch(`http://localhost:8000/books/${bookId}`, 
+    {
+        method: "DELETE",
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+        }
+    })
+}
+

@@ -60,21 +60,21 @@ export const Register = () => {
                     <input ref={username} type="text" name="username" className="form-control" placeholder="Username" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputPassword"> Password </label>
-                    <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
-                </fieldset>
-                <fieldset>
                     <label htmlFor="inputEmail"> Email </label>
                     <input ref={email} type="email" name="email" className="form-control" placeholder="Email" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="inputPassword"> Password </label>
+                    <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                 </fieldset>
-                <fieldset>
+                {/* <fieldset>
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <textarea ref={email} name="email" className="form-control" placeholder="Let other gamers know a little bit about you..." />
-                </fieldset>
+                </fieldset> */}
                 <fieldset style={{
                     textAlign: "center"
                 }}>
