@@ -1,24 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getBooks, deleteBook, UpdateBook } from "../../managers/BookManager.js";
+import { getBooks, deleteBook, UpdateBook, getAgeRanges } from "../../managers/BookManager.js";
 
 
-export const BookList = (props) => {
+export const BookList = (props, searchTermState) => {
   const [books, setBooks] = useState([]);
   const [selectedAgeRange, setSelectedAgeRange] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [ageRanges, setAgeRanges] = useState([]);
   const userId = parseInt(localStorage.getItem("user_id"));
 
 
   useEffect(() => {
-    getBooks().then((data) => { console.log(data)
+    getBooks().then((data) => { 
       // Update addedByCurrentUser property for each book
-      console.log(data[2].reader.id,userId)
+      
       const updatedBooks = data.map((book) => ({
         ...book,
         addedByCurrentUser: book.reader.id === parseInt(userId),
       }));
-      console.log(updatedBooks)
+      
       setBooks(updatedBooks);
     });
   }, [userId]);
@@ -27,6 +28,12 @@ export const BookList = (props) => {
     setSelectedAgeRange(event.target.value);
   };
 
+  useEffect(() => {
+    getAgeRanges().then((data) => {
+      setAgeRanges(data);
+    });
+  }, []);
+  
 
 
 
@@ -85,7 +92,6 @@ export const BookList = (props) => {
     ? books
       .filter((book) => book.age_range.label === selectedAgeRange)
     : books
-console.log(filteredBooks)
   // const handleAddToLibrary = (book) => {
   //   props.onAddToLibrary(book);
   // };
@@ -93,12 +99,7 @@ console.log(filteredBooks)
   return (
 
     <div>
-      {/* //when a user clicks on the button, the book is added to the user's library
-      <button onClick={() => props.onAddToLibrary(book)}>Add to Library</button> */}
 
-
-
-      <h2>Want to read</h2>
       <Link to="/bookform">  <button>Create a Book</button></Link>
       <table className="books">
         <thead>
@@ -116,14 +117,13 @@ console.log(filteredBooks)
             <th>
               <select
                 value={selectedAgeRange}
-                onChange={handleSelectAgeRange}
+                onChange={event => handleSelectAgeRange(event)}
               >
                 <option value="">Filter By Age Range</option>
-                <option value="infant to 3 years">infant to 3 years</option>
-                <option value="3 to 6 years">3 to 6 years</option>
-                <option value="6 to 10 years">6 to 10 years</option>
-                <option value="8 to 12 years">8 to 12 years</option>
-                <option value="12 years and older">12 years and older</option>
+                {ageRanges.map(ageRange => (
+                  <option key={`ageRange--${ageRange.id}`} value={ageRange.label} name={ageRange.label}>{ageRange.label}</option>
+                  
+                ))}
               </select>
             </th>
           </tr>
@@ -158,3 +158,5 @@ console.log(filteredBooks)
     </div>
   );
 };
+
+
