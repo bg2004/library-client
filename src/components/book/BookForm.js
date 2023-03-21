@@ -12,14 +12,14 @@ export const BookForm = () => {
         the properties of this state variable, you need to
         provide some default values.
     */
-    const [currentBook, setCurrentBook] = useState({
-        title: "",
-        author: "",
-        description: "",
-        age_range: ""
-    })
-
-    const [reader, setReader] = useState("")
+        const [currentBook, setCurrentBook] = useState({
+            title: "",
+            author: "",
+            description: "",
+            age_range: "",
+            reader: ""
+        })
+        
 
     useEffect(() => {
         // Fetch the age ranges from your API and set the state
@@ -36,12 +36,6 @@ export const BookForm = () => {
             [name]: value
         }))
     }
-
-    const changeReaderState = (domEvent) => {
-        const { value } = domEvent.target
-        setReader(value)
-    }
-    
 
     return (
         <form className="bookForm">
@@ -73,36 +67,27 @@ export const BookForm = () => {
                     />
                 </div>
             </fieldset>
+        
+
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="reader">Reader who uploaded book: </label>
-                    <input type="text" name="reader" required autoFocus className="form-control"
-                        value={reader}
-                        onChange={changeReaderState}
-                    />
+                    <label className="label">Age Ranges: </label>
+                    <select
+                        name="age_range"
+                        className="form-control"
+                        value={currentBook.age_range}
+                        onChange={(event) => {
+                            const copy = { ...currentBook }
+                            copy.age_range = parseInt(event.target.value)
+                            setCurrentBook(copy)
+                        }}>
+                        <option value="0">Choose:</option>
+                        {ranges.map(range => ( 
+                            <option key={`range--${range.id}`} value={range.id} label={range.label}>{range.label}</option>                         
+                        ))}
+                    </select>
                 </div>
             </fieldset>
-            <fieldset>
-    <div className="form-group">
-        <label className="label">Age Ranges: </label>
-        <select
-            name="age_range"
-            className="form-control"
-            value={currentBook.age_range}
-            onChange={(event) => {
-                const copy = { ...currentBook }
-                copy.age_range = parseInt(event.target.value)
-                setCurrentBook(copy)
-            }}>
-            <option value="0">Choose:</option>
-            {ranges.map(range => ( 
-                <option key={`range--${range.id}`} value={range.id} label={range.label}>{range.label}</option>                         
-            ))}
-        </select>
-    </div>
-</fieldset>
-
-
 
             {/* TODO: create the rest of the input fields */}
 
@@ -112,17 +97,25 @@ export const BookForm = () => {
                     evt.preventDefault()
 
                     const book = {
+                        Image: currentBook.book_image,
                         title: currentBook.title,
                         author: currentBook.author,
                         description: currentBook.description,
-                        age_range: currentBook.age_range
+                        age_range: currentBook.age_range,
+                        reader: currentBook.reader
                     }
 
-                    // Send POST request to your API
-                    createBook(book)
-                        .then(() => navigate("/books"))
-                }}
-                className="btn btn-primary">Add Book</button>
-        </form>
-    )
+
+                                    // Call the createBook function and pass in the book object
+                createBook(book)
+                .then(() => {
+                    // Navigate to the book list page
+                    navigate('/books') && navigate('/mybooks')
+                })
+                .catch(error => console.error(error))
+        }}
+        className="btn btn-primary">Create Book</button>
+</form>
+)
+
 }

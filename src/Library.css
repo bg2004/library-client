@@ -36,3 +36,57 @@
     transform: rotate(360deg);
   }
 }
+.book-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.book-details img {
+  width: 200px;
+  height: 300px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.book-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.book-details p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.book-details .details-label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.book-details .details-value {
+  margin-bottom: 10px;
+}
+
+.book-details button {
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  background-color: #0077cc;
+  color: #fff;
+  cursor: pointer;
+}
+
+.book-details button:hover {
+  background-color: #005ea8;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-top-color: inherit;
+  border-right-color: inherit;
+  border-bottom-color: inherit;
+  border-left-color: inherit;
+  }
