@@ -3,15 +3,18 @@ import { useState } from "react";
 import "./NavBar.css";
 import logo from "../assets/logo.png";
 import { BookSearch } from "../book/BookSearch";
+import { useEffect } from "react";
 
-export const NavBar = () => {
+export const NavBar = (searchTermState) => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
+  
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
-
+  useEffect(() => {
+  }, [searchTermState])
   return (
     <nav className="navbar">
       <div className="navbar__left">
